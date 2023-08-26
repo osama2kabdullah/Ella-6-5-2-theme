@@ -1,3 +1,43 @@
+{% assign saleProducts = '' %}
+{% assign inStockProducts = '' %}
+{% assign outOfStockProducts = '' %}
+
+{% for collection in collections %}
+  {% assign collectionHandle = collection.handle %}
+  {% for product in collection.products %}
+    {% if product.available == true and product.compare_at_price > product.price %}
+      {% assign saleProducts = saleProducts
+        | append: ','
+        | append: forloop.index
+        | append: '|'
+        | append: collectionHandle
+      %}
+
+    {% elsif product.available == false %}
+      {% assign outOfStockProducts = outOfStockProducts
+        | append: ','
+        | append: forloop.index
+        | append: '|'
+        | append: collectionHandle
+      %}
+
+    {% else %}
+      {% assign inStockProducts = inStockProducts
+        | append: ','
+        | append: forloop.index
+        | append: '|'
+        | append: collectionHandle
+      %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+
+{% assign saleProducts = saleProducts | remove_first: ',' | split: ',' %}
+{% assign inStockProducts = inStockProducts | remove_first: ',' | split: ',' %}
+{% assign outOfStockProducts = outOfStockProducts | remove_first: ',' | split: ',' %}
+
+{% assign sortedProducts = saleProducts | concat: inStockProducts | concat: outOfStockProducts %}
+<!-- ---- -->
 
 {%- liquid
   assign colors_bg = section.settings.colors_bg
@@ -234,54 +274,36 @@
               id="main-collection-product-grid"
               data-id="{{ section.id }}"
             >
-              {% for collection in collections %}
-                {% for product in collection.products %}
-                  {% if product.compare_at_price > product.price and product.available == true %}
-                    <li class="product">
-                      {% render 'product-grid-layout',
-                        product_card_product: product,
-                        serial: forloop.index,
-                        sectionId: section.id,
-                        show_list: true,
-                        loading: true
-                      %}
-                    </li>
-                  {% endif %}
+
+              {% assign productsPerPage = products_per_page %}
+              {% assign currentPage = 1 %}
+              {% assign minusCurrentPage = currentPage | minus: 1 %}
+              {% assign firstInto = minusCurrentPage | times: productsPerPage %}
+              {% assign secondInto = currentPage | times: productsPerPage %}
+              {% assign productsToShow = sortedProducts | slice: firstInto, secondInto %}
+
+              {% assign ownId = 0 %}
+              {% for sortedProduct in productsToShow %}
+                {% assign ownId = ownId | plus: 1 %}
+                {% assign pt = sortedProduct | split: '|' %}
+                {% assign productInedex = pt[0] | times: 1 %}
+                {% assign collectionHandler = pt[1] %}
+                {% for product in collections[collectionHandler].products %}
+                  {% case forloop.index %}
+                    {% when productInedex %}
+                      <li class="product">
+                        {{ ownId }} - page-size: {{ paginate.page_size }}
+                        {% render 'product-grid-layout',
+                          product_card_product: product,
+                          serial: ownId,
+                          sectionId: section.id,
+                          show_list: true,
+                          loading: true
+                        %}
+                      </li>
+                  {% endcase %}
                 {% endfor %}
               {% endfor %}
-
-                  {% comment %}
-                    {% for product in collection.products %}
-                      {% if product.available == true %}
-                        {% if product.compare_at_price > product.price %}
-                          {% else %}
-                          <li class="product">
-                            {% render 'product-grid-layout',
-                              product_card_product: product,
-                              serial: forloop.index,
-                              sectionId: section.id,
-                              show_list: true,
-                              loading: true
-                            %}
-                          </li>
-                        {% endif %}
-                      {% endif %}
-                    {% endfor %}
-                    {% for product in collection.products %}
-                      {% if product.available == false %}
-                        <li class="product">
-                          {% render 'product-grid-layout',
-                            product_card_product: product,
-                            serial: forloop.index,
-                            sectionId: section.id,
-                            show_list: true,
-                            loading: true
-                          %}
-                        </li>
-                      {% endif %}
-                    {% endfor %}
-                  {% endcomment %}
-
             </ul>
             {%- if paginate.pages > 1 -%}
               {%
@@ -344,6 +366,38 @@
   </div>
 </div>
 
+{% assign defaultLimit = 4 %}
+
+<button class="dasahCall">call</button>
+<div class="babarghor">
+  <li>ami</li>
+</div>
+<script>
+  let oldPage = 1;
+  let currentPage = oldPage;
+  const oldSorted = {{ sortedProducts | json }};
+  const collections = {{ collections | json }};
+  document.querySelector(".dasahCall").addEventListener("click", ()=>{
+    currentPage += 1;
+    
+    const productsPerPage = {{ products_per_page }};
+    const firstInto = (currentPage - 1) * productsPerPage;
+    const secondInto = currentPage * productsPerPage;
+    const newSorted = oldSorted.slice(firstInto, secondInto);
+
+    newSorted.forEach(el=>{
+      const matchingCollection = collections.find(obj => obj.handle == el.split("|")[1]);
+      console.log("s", matchingCollection );
+    })
+
+
+    const node = document.createElement("li");
+    const textnode = document.createTextNode("Water");
+    node.appendChild(textnode);
+    document.getElementById("main-collection-product-grid").appendChild(node);
+
+  })
+</script>
 
 {% comment %}
   {% for collection in collections %}
