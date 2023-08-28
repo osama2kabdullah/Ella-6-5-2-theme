@@ -392,28 +392,30 @@
 </style>
 <script>
   
-    window.product_inven_array_{{ product.id }} = {
-        {% for variant in product.variants %}
-            '{{ variant.id }}': '{{ variant.inventory_quantity }}',
-        {%endfor%}
-    };
-
-    window.selling_array_{{ product.id }} = {
-        {% for variant in product.variants %}
-            '{{ variant.id }}': '{{ variant.inventory_policy }}',
-        {%endfor%}
-    };
-
-    window.subtotal = {
-        show: {{ show_subtotal_text }},
-        style: {{ subtotal_style }},
-        text: `{{ 'products.product.sub_total' | t : value : '[value]' }}`
-    };
-  {% if show_variant_image_group %}
-    window.variant_image_group = {{ show_variant_image_group }};
-  {% else %}
-    window.variant_image_group = 'false';
-  {% endif %}
+    
+      window.product_inven_array_{{ product.id }} = {
+          {% for variant in product.variants %}
+              '{{ variant.id }}': '{{ variant.inventory_quantity }}',
+          {%endfor%}
+      };
+  
+      window.selling_array_{{ product.id }} = {
+          {% for variant in product.variants %}
+              '{{ variant.id }}': '{{ variant.inventory_policy }}',
+          {%endfor%}
+      };
+  
+      window.subtotal = {
+          show: {{ show_subtotal_text }},
+          style: {{ subtotal_style }},
+          text: `{{ 'products.product.sub_total' | t : value : '[value]' }}`
+      };
+    {% if show_variant_image_group %}
+      window.variant_image_group = {{ show_variant_image_group }};
+    {% else %}
+      window.variant_image_group = 'false';
+    {% endif %}
+  
 
 </script>
 {%- if product_image_popup == 'fancybox' -%}
@@ -421,6 +423,7 @@
   <noscript>{{ 'component-fancybox.css' | asset_url | stylesheet_tag }}</noscript>
 {%- endif -%}
 <div
+  style="padding: 70px;"
   class="product-details product-default{% if has_sidebar %} has-sidebar{% endif %}"
   data-section-id="{{ section.id }}"
   data-section-type="product"
