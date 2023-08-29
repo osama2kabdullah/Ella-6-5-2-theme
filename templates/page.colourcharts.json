@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {}
+    },
+    "304b64fe-24c5-4ebc-a4cb-b7cf9d3acb5e": {
+      "type": "custom-liquid",
+      "custom_css": [
+        ".four-column-section {display: flex; justify-content: space-between; }",
+        " .column {flex: 1; text-align: center; padding: 20px; }",
+        " .column img {max-width: 100%; height: auto; max-height: 150px; \/* Set a maximum height for the images *\/ }",
+        " .column p {margin-top: 10px; font-size: 18px; \/* Increase the font size of the text *\/ }",
+        " .four-column-section .column p {color: black; }"
+      ],
+      "settings": {
+        "custom_liquid": "<div class=\"four-column-section\">\n  <div class=\"column\">\n    <img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/2153\/5103\/files\/ADuskyDay_bdbc71d9-9c66-4d6e-ae90-82b874667c7e.webp?v=1692688670\" alt=\"Image 2\">\n    <p>dummy<\/p>\n  <\/div>\n  <div class=\"column\">\n    <img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/2153\/5103\/files\/ADuskyDay_bdbc71d9-9c66-4d6e-ae90-82b874667c7e.webp?v=1692688670\" alt=\"Image 2\">\n    <p>dummy<\/p>\n  <\/div>\n  <div class=\"column\">\n    <img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/2153\/5103\/files\/ADuskyDay_bdbc71d9-9c66-4d6e-ae90-82b874667c7e.webp?v=1692688670\" alt=\"Image 3\">\n    <p>dummy<\/p>\n  <\/div>\n  <div class=\"column\">\n    <img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/2153\/5103\/files\/ADuskyDay_bdbc71d9-9c66-4d6e-ae90-82b874667c7e.webp?v=1692688670\" alt=\"Image 4\">\n    <p>dummy<\/p>\n  <\/div>\n<\/div>"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "304b64fe-24c5-4ebc-a4cb-b7cf9d3acb5e"
+  ]
+}

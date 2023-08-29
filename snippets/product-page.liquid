@@ -392,6 +392,7 @@
 </style>
 <script>
   
+  
     window.product_inven_array_{{ product.id }} = {
         {% for variant in product.variants %}
             '{{ variant.id }}': '{{ variant.inventory_quantity }}',
@@ -414,6 +415,7 @@
   {% else %}
     window.variant_image_group = 'false';
   {% endif %}
+
 
 </script>
 {%- if product_image_popup == 'fancybox' -%}
