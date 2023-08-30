@@ -1444,20 +1444,7 @@
         </div>
       {% endif %}
       {%- unless has_product_combo -%}
-        {%- if show_sticky_add_to_cart -%}
-          {{ 'component-sticky-add-to-cart.css' | asset_url | stylesheet_tag }}
-          {% render 'halo-sticky-add-to-cart',
-            product: product,
-            current_variant: current_variant,
-            variantCount: variantCount,
-            show_vendor: show_sticky_vendor,
-            sticky_atc_layout: sticky_atc_layout,
-            container: container,
-            show_qty: show_qty,
-            qty_style: qty_style,
-            subtotal: subtotal
-          %}
-        {%- endif -%}
+        
       {%- endunless -%}
     </div>
   </div>
@@ -1496,9 +1483,6 @@
 {%- endif -%}
 
 <script src="{{ 'variants.js' | asset_url }}" defer="defer"></script>
-{%- if show_sticky_add_to_cart -%}
-  <script src="{{ 'sticky-add-to-cart.js' | asset_url }}" defer="defer"></script>
-{%- endif -%}
 {%- if first_3d_model -%}
   <script src="{{ 'deferred-media.js' | asset_url }}" defer></script>
   <script type="application/json" id="ProductJSON-{{ product.id }}">

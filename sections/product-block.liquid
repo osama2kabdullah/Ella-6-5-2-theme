@@ -565,6 +565,40 @@
                     {%- if layout == 'scroll' -%}
                         <product-scroller>
                     {%- endif -%}
+                    {%- if layout== 'new_template' -%}
+                        <div class="halo-block-content">
+                            {%- liquid
+                                assign product_limit = 0
+                                assign column = section.settings.product_block_per_row
+                                if infinite_scroll
+                                    assign product_limit = limit
+                                endif
+                            -%}
+                            <div class="products-grid column-{{ column }}{% if swipe %} slider slider--tablet grid grid--peek{% endif %}" data-products-to-show="{{ limit }}">
+                                {%- if collection.products[0] != nil -%}
+                                    {%- for tag in current_tags -%}
+                                        {%- if tag contains 'limit=' -%}
+                                            {%- assign limit = tag | remove: 'limit=' -%}
+                                        {%- elsif tag contains 'sectionId=' -%}
+                                            {%- assign sectionId = tag | remove: 'sectionId=' -%}
+                                        {%- elsif tag contains 'imageRatio=' -%}
+                                            {%- assign image_ratio = tag | remove: 'imageRatio=' -%}
+                                        {%- elsif tag contains 'swipe=' -%}
+                                            {%- assign swipe = tag | remove: 'swipe=' -%}
+                                        {%- elsif tag contains 'hasCountdown=' -%}
+                                            {%- assign hasCountdown = tag | remove: 'hasCountdown=' -%}
+                                        {%- endif -%}
+                                    {%- endfor -%}
+
+                                    {% for product in collection.products limit: limit %}
+                                        <div class="product {% if swipe == 'true' %} slider__slide grid__item{% endif %}">
+                                            {% render 'product-card', product_card_product: product, media_size: image_ratio, portrait_aspect_ratio: '133' %}
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% else %}
                         <div class="halo-block-content {% if layout == 'scroll' %}is-scroll{% endif %}{% if section.settings.enable_layout_special %} enable_layout_special{% endif %}"  {% if layout == 'scroll' %}data-drag-container{% endif %}>
                             {%- if layout== 'grid' -%}
                                 {%- liquid
@@ -666,6 +700,7 @@
                                 </div>
                             {%- endif -%}
                         </div>
+                    {% endif %}
                     {%- if layout == 'scroll'-%}
                         </product-scroller>
                     {% endif -%}
@@ -880,6 +915,10 @@
         {
             "value": "slider",
             "label": "t:sections.product_block.settings.product_block_layout.option2"
+        },
+        {
+            "value": "new_template",
+            "label": "New Template"
         },
         {
             "value": "scroll",
