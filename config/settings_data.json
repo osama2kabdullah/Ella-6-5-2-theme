@@ -227,6 +227,7 @@
     "before_you_leave_collection": "milancelos",
     "before_you_leave_collection_limit": 3,
     "before_you_leave_btn": "1",
+    "show_notify_form": false,
     "notify_form_btn": "1",
     "show_ask_an_expert": false,
     "ask_an_expert_show": "all_page",
@@ -657,8 +658,10 @@
   },
   "platform_customizations": {
     "custom_css": [
+      ".card-vendor a {font-size: inherit; font-weight: inherit; color: inherit; line-height: inherit; letter-spacing: inherit; display: none;}",
       ".header-basic__item .header__icon--cart .cart-count-bubble {display: flex !important; align-content: center; justify-content: center; align-items: center; background-color: #ff9fa6; color: var(--cart-color-item);}",
-      ".card-quickview .quickview-icon {background-color: var(--product-quick-view-bg); border: none; display: none;}"
+      ".card-quickview .quickview-icon {background-color: var(--product-quick-view-bg); border: none; display: none;}",
+      ".halo-productBadges .badge.sold-out-badge {color: var(--sold-out-badge-color); background-color: orange !important;}"
     ]
   }
 }

@@ -16,3 +16,7 @@
  * ----------------------------------------------------------------------------
  */
 
+.halo-productBadges .badge.sold-out-badge {
+    color: var(--sold-out-badge-color);
+    background-color: orange!important;
+}
