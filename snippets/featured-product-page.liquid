@@ -427,8 +427,8 @@
   <noscript>{{ 'component-fancybox.css' | asset_url | stylesheet_tag }}</noscript>
 {%- endif -%}
 <div
-  style="padding: 70px;"
-  class="product-details product-default{% if has_sidebar %} has-sidebar{% endif %}"
+  style="padding: 70px 70px 0px 70px"
+  class="container product-details product-default{% if has_sidebar %} has-sidebar{% endif %}"
   data-section-id="{{ section.id }}"
   data-section-type="product"
   id="ProductSection-{{ section.id }}"
@@ -467,6 +467,7 @@
   {% endif %}
   <div class="{% if container == '1170' %}container-1170{% elsif container == '1770' %}container-1770{% elsif container == 'fullwidth'%}container-full{% else %}container{% endif %} productView-container">
     <div
+      style="padding-bottom: 0px;"
       class="productView halo-productView layout-{{ thumnail_layout }} positionMainImage--{{ main_image_position }}{% if product.media.size == 0 %} productView-no-media{% endif %}{% if show_sticky_info %} productView-sticky{% endif %}{% if main_image_enable_parallax_mb %} productView-parallax-mobile{%endif %}{% if has_sidebar %} has-left-sidebar sidebar--layout_{{ sidebar_type }}{% endif %}"
       data-product-handle="{{ product.handle }}"
     >

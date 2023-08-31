@@ -552,14 +552,7 @@
                                 <div class="product-countdown-block countdown-{{ section.id }}" data-countdown data-countdown-value="{{ countdown }}"></div>
                             </div>
                             {%- endif -%}
-                            {%- if section.settings.view_all != blank -%}
-                            <a class="view_all"{% if section.settings.link_view_all == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.link_view_all }}"{% endif %} title="{{section.settings.view_all}}">
-                                {%- if section.settings.icon_view_all -%}
-                                <span class="icon-svg">{{ section.settings.icon_view_all }}</span>
-                                {%- endif -%}
-                                {{ section.settings.view_all }}
-                            </a>
-                            {%- endif -%}
+                            
                         </div>
                     {%- endif -%}
                     {%- if layout == 'scroll' -%}
@@ -597,6 +590,32 @@
                                     {% endfor %}
                                 {% endif %}
                             </div>
+                            
+                            {%- if section.settings.view_all != blank -%}
+                                <div style="margin-top: 33px;">
+                                    <a class="view_all"{% if section.settings.link_view_all == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.link_view_all }}"{% endif %} title="{{section.settings.view_all}}">
+                                        {%- if section.settings.icon_view_all -%}
+                                        <span class="icon-svg">{{ section.settings.icon_view_all }}</span>
+                                        {%- endif -%}
+                                        {{ section.settings.view_all }}
+                                    </a>
+                                </div>
+                                <style>
+                                    .view_all {
+                                        color: rgb(255, 255, 255);
+                                        background-color: rgb(255, 159, 166);
+                                        border-color: rgb(255, 159, 166);
+                                        padding: 11px 100px;
+                                        font-size: 15px;
+                                    }
+                                    .view_all:hover {
+                                        background-color: black;
+                                        border-color: rgb(255, 159, 166);
+                                        color: rgb(255, 255, 255);
+                                    }
+                                </style>
+                            {%- endif -%}
+
                         </div>
                         {% else %}
                         <div class="halo-block-content {% if layout == 'scroll' %}is-scroll{% endif %}{% if section.settings.enable_layout_special %} enable_layout_special{% endif %}"  {% if layout == 'scroll' %}data-drag-container{% endif %}>

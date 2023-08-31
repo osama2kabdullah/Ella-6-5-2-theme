@@ -177,7 +177,7 @@
             }
         {%- endif -%}
     </style>
-    <div class="halo-block halo-banner image-banner style_bg--{{ section.settings.style_bg }}{%- if section.settings.bg_image != blank -%} image-banner--bg-image{%- endif -%}" id="halo-image-banner-{{ section.id }}" style="--section_margin: {{ list_gap }};--mg_top_desktop: {{ mg_top_desktop | append: 'px' }};--mg_top_tablet:{{ mg_top_tablet | append: 'px' }};--mg_top_mobile: {{ mg_top_mobile | append: 'px' }};--mg_bottom_desktop:{{ mg_bottom_desktop | append: 'px' }};--mg_bottom_tablet:{{ mg_bottom_tablet | append: 'px' }};--mg_bottom_mobile:{{ mg_bottom_mobile | append: 'px' }};--padding_full_width:{{ padding_full_width | append: 'px' }};
+    <div class="container halo-block halo-banner image-banner style_bg--{{ section.settings.style_bg }}{%- if section.settings.bg_image != blank -%} image-banner--bg-image{%- endif -%}" id="halo-image-banner-{{ section.id }}" style="--section_margin: {{ list_gap }};--mg_top_desktop: {{ mg_top_desktop | append: 'px' }};--mg_top_tablet:{{ mg_top_tablet | append: 'px' }};--mg_top_mobile: {{ mg_top_mobile | append: 'px' }};--mg_bottom_desktop:{{ mg_bottom_desktop | append: 'px' }};--mg_bottom_tablet:{{ mg_bottom_tablet | append: 'px' }};--mg_bottom_mobile:{{ mg_bottom_mobile | append: 'px' }};--padding_full_width:{{ padding_full_width | append: 'px' }};
             {%- if section.settings.bg_image != blank -%}
                 background: url({{ section.settings.bg_image | img_url: '1920x' }});background-repeat: no-repeat;background-size: cover
             {%- else -%}
